@@ -20,7 +20,8 @@ func _on_music_player_finished():
 	else:
 		stop_music()
 
-func play_click(volume = 0.0):	
+func play_click(volume = -10.0):	
+	$click_player.volume_db = volume
 	$click_player.play()
 
 func change_mute():
