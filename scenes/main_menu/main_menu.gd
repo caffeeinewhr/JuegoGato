@@ -5,7 +5,7 @@ extends Control
 
 func _ready():
 	AudioPlayer.play_music(menu_bg_sound, 0.0)
-	AudioPlayer.play_music(menu_music, -20.0)
+	AudioPlayer.play_music(menu_music, -10.0)
 	
 func _on_play_button_pressed():
 	AudioPlayer.play_click()
