@@ -22,6 +22,7 @@ buses/default_bus_layout=""
 [autoload]
 
 Events="*res://global/events.gd"
+AudioPlayer="*res://global/audio_player/audio_player.tscn"
 
 [display]
 
