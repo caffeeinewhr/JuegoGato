@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://c6co1f6ltokpw"]
+[gd_scene load_steps=11 format=3 uid="uid://c6co1f6ltokpw"]
 
 [ext_resource type="Texture2D" uid="uid://cp4iq5fd6j8be" path="res://art/background.png" id="1_x1rv3"]
 [ext_resource type="PackedScene" uid="uid://5pc75v2lnyej" path="res://scenes/card_ui/card_ui.tscn" id="2_aqod8"]
@@ -8,12 +8,12 @@
 [ext_resource type="PackedScene" uid="uid://efmvom1i6akt" path="res://scenes/player/player.tscn" id="3_mmqxs"]
 [ext_resource type="Resource" uid="uid://bhsgjlhr8xhye" path="res://characters/warrior/cards/warrior_axe_attack.tres" id="4_io3gd"]
 [ext_resource type="Resource" uid="uid://byk45wvc2hf4i" path="res://characters/warrior/cards/warrior_block.tres" id="5_f3vh2"]
+[ext_resource type="PackedScene" uid="uid://c7r8gs68656vi" path="res://scenes/pause_menu/pause_menu.tscn" id="9_edasq"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qrmle"]
 size = Vector2(256, 100)
 
 [node name="Battle" type="Node2D"]
-metadata/_edit_lock_ = true
 
 [node name="Background" type="Sprite2D" parent="."]
 modulate = Color(0.447059, 0.447059, 0.447059, 1)
@@ -31,6 +31,7 @@ shape = SubResource("RectangleShape2D_qrmle")
 [node name="Enemy" parent="." instance=ExtResource("2_v1hmm")]
 
 [node name="CardTargetSelector" parent="." instance=ExtResource("3_en8h8")]
+metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("3_mmqxs")]
 position = Vector2(40, 73)
@@ -62,3 +63,13 @@ card = ExtResource("4_io3gd")
 [node name="CardUI3" parent="BattleUI/Hand" instance=ExtResource("2_aqod8")]
 layout_mode = 2
 card = ExtResource("5_f3vh2")
+
+[node name="PauseMenu" parent="." instance=ExtResource("9_edasq")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+grow_horizontal = 1
+grow_vertical = 1
+size_flags_horizontal = 4
+size_flags_vertical = 4
+metadata/_edit_use_anchors_ = true

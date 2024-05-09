@@ -1,0 +1,52 @@
+[gd_scene load_steps=5 format=3 uid="uid://c7r8gs68656vi"]
+
+[ext_resource type="Theme" uid="uid://cfm0lf67o8s1t" path="res://Default.tres" id="1_bhfsi"]
+[ext_resource type="Script" path="res://scenes/pause_menu/pause_menu.gd" id="1_hvjqk"]
+
+[sub_resource type="Gradient" id="Gradient_20c7c"]
+colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_yvkrp"]
+gradient = SubResource("Gradient_20c7c")
+
+[node name="PauseMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_hvjqk")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(128, 72)
+scale = Vector2(4, 2.25)
+texture = SubResource("GradientTexture2D_yvkrp")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 4
+
+[node name="Music" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_bhfsi")
+theme_override_font_sizes/font_size = 8
+text = "Music: ON"
+
+[node name="Quit" type="Button" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+theme = ExtResource("1_bhfsi")
+theme_override_font_sizes/font_size = 8
+text = "Quit"
+
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Music" to="." method="_on_music_pressed"]
+[connection signal="pressed" from="MarginContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
