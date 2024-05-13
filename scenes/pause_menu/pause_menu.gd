@@ -9,20 +9,39 @@ func _process(_delta):
 func pauseMenu():
 	paused = !paused
 	if paused:
+		print("pauso")
 		$".".show()
-		Engine.time_scale = 0
+		AudioSettings.volume = -5.0
+		print(AudioSettings.volume)
+		get_tree().paused = true
 	else:
+		print("quito pausa")
 		$".".hide()
-		Engine.time_scale = 1
+		AudioSettings.volume = 0.0
+		print(AudioSettings.volume)
+		get_tree().paused = false
 
-func _on_music_pressed():
-	AudioPlayer.play_click()
-	AudioPlayer.change_mute()
-	if AudioPlayer.isVolumeUp:
-		$"."/MarginContainer/VBoxContainer/Music.set_text("Music: ON") 
+func _on_music_button_pressed():
+	print("musica pulsado")
+	$Audio/NormalClick.play()
+	print(AudioSettings.isVolumeUp)
+	if AudioSettings.isVolumeUp:
+		print("Music: ON")
+		$VBoxContainer/MusicButton.set_text("Music: ON") 
+		AudioSettings.isVolumeUp = false
 	else:
-		$"."/MarginContainer/VBoxContainer/Music.set_text("Music: OFF") 
+		print("Music: OFF")
+		$VBoxContainer/MusicButton.set_text("Music: OFF") 
+		AudioSettings.isVolumeUp = true
+	
+func _on_resume_button_pressed():
+	print("resume pulsado")
+	$Audio/ExitClick.play()
+	pauseMenu()
 
-func _on_quit_pressed():
-	AudioPlayer.play_click()
+func _on_quit_button_pressed():
+	print("quit pulsado")
+	$Audio/ExitClick.play()
+	await get_tree().create_timer(0.5).timeout
 	get_tree().quit()
+	

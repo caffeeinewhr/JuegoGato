@@ -1,7 +1,0 @@
-[gd_resource type="Theme" load_steps=2 format=3 uid="uid://cuvab3qu8ggvx"]
-
-[ext_resource type="FontFile" uid="uid://ddm3m57t31rfs" path="res://art/fonts/JMH Typewriter.otf" id="1_2kdpl"]
-
-[resource]
-default_font = ExtResource("1_2kdpl")
-default_font_size = 8

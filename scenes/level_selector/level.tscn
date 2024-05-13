@@ -1,14 +1,93 @@
-[gd_scene load_steps=5 format=3 uid="uid://dpqmqkkjxn61l"]
+[gd_scene load_steps=10 format=3 uid="uid://dpqmqkkjxn61l"]
 
 [ext_resource type="Script" path="res://scenes/level_selector/level.gd" id="1_52mp4"]
 [ext_resource type="FontFile" uid="uid://ddm3m57t31rfs" path="res://art/fonts/JMH Typewriter.otf" id="1_fimaj"]
-[ext_resource type="Theme" uid="uid://cj8oybu6snjs0" path="res://DefaultLevel.tres" id="3_lul3h"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_q3vf4"]
 font = ExtResource("1_fimaj")
 font_size = 8
 outline_size = 2
 outline_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gotea"]
+bg_color = Color(0.137255, 0.137255, 0.137255, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.368627, 0.368627, 0.368627, 0.85098)
+border_blend = true
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+shadow_color = Color(0, 0, 0, 0.733333)
+shadow_size = 2
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jvsnd"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mtler"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0.847059, 0, 0, 0.85098)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rsaco"]
+bg_color = Color(0, 0, 0, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.85098)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8vmr"]
+bg_color = Color(0.180392, 0.180392, 0.180392, 1)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(1, 1, 1, 0.85098)
+corner_radius_top_left = 5
+corner_radius_top_right = 5
+corner_radius_bottom_right = 5
+corner_radius_bottom_left = 5
+
+[sub_resource type="Theme" id="Theme_xyhdb"]
+default_font = ExtResource("1_fimaj")
+default_font_size = 16
+Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
+Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
+Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
+Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/font_outline_color = Color(0, 0, 0, 1)
+Button/colors/font_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
+Button/colors/icon_focus_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_color = Color(1, 1, 1, 1)
+Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
+Button/colors/icon_normal_color = Color(1, 1, 1, 1)
+Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
+Button/constants/h_separation = 4
+Button/constants/icon_max_width = 0
+Button/constants/outline_size = 4
+Button/font_sizes/font_size = 16
+Button/fonts/font = ExtResource("1_fimaj")
+Button/styles/disabled = SubResource("StyleBoxFlat_gotea")
+Button/styles/focus = SubResource("StyleBoxEmpty_jvsnd")
+Button/styles/hover = SubResource("StyleBoxFlat_mtler")
+Button/styles/normal = SubResource("StyleBoxFlat_rsaco")
+Button/styles/pressed = SubResource("StyleBoxFlat_x8vmr")
 
 [node name="Level" type="Control" groups=["levelControls"]]
 layout_mode = 3
@@ -55,6 +134,6 @@ offset_bottom = 6.5
 grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 2
-theme = ExtResource("3_lul3h")
+theme = SubResource("Theme_xyhdb")
 
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

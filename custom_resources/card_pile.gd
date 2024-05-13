@@ -1,4 +1,4 @@
-class_name  CardPile
+class_name CardPile
 extends Resource
 
 signal card_pile_size_changed(cards_amount)

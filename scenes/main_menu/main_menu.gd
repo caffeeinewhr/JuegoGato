@@ -1,15 +1,13 @@
 extends Control
 
-@onready var music = preload("res://art/music/demo_menu.wav")
-
 func _ready():
-	AudioPlayer.play_music(music, -10.0)
+	pass
 	
-func _on_play_pressed():
-	AudioPlayer.play_click()
-	AudioPlayer.stop_music()
+func _on_play_button_pressed():
+	$Audio/NormalClick.play()
 	get_tree().change_scene_to_file("res://scenes/level_selector/level_selector.tscn")
-
-func _on_quit_pressed():
-	AudioPlayer.play_click()
+	
+func _on_quit_button_pressed():
+	$Audio/ExitClick.play()
+	await get_tree().create_timer(0.5).timeout
 	get_tree().quit()

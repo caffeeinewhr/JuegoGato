@@ -1,24 +1,27 @@
 extends Control
 
-var levelCount: int = 5
-var levels: Array[Level] = []
-var completedLevels: Array[Level] = []
-@onready var music = preload("res://art/music/mapa.wav")
+@onready var LevelScene = preload("res://scenes/level_selector/level.tscn")
+
+@export var levels: Array[Level] = []
+@export var levelCount: int = 5
+@export var completedLevels: Array[Level] = []
+
+@export var minX: int = 20
+@export var maxX: int = size.x - 20
+@export var minY: int = 20
+@export var maxY: int = size.y - 20 
+
+@export var lineWidth: int = 2
 
 func _ready():
-	AudioPlayer.play_music(music, 0.0)
-	placeLevelsRandomly()
+	placeLevels()
 	connectLevels()
 	
-func placeLevelsRandomly():
-	var minX = 20
-	var maxX = size.x - 20
-	var minY = 20
-	var maxY = size.y - 20 
+func placeLevels():
 	var lastPosition = Vector2(minX, randf_range(minY, maxY))
 	
 	for i in range(levelCount):
-		var level = Level.new()
+		var level = LevelScene.instantiate() 
 		level.number = i + 1
 		level.position = lastPosition
 		levels.append(level)
@@ -31,6 +34,6 @@ func connectLevels():
 	for i in range(levels.size() - 1):			
 		var line = Line2D.new()
 		line.points = [levels[i].position, levels[i + 1].position]
-		line.width = 3
+		line.width = lineWidth
 		line.z_index = -1
 		add_child(line)
