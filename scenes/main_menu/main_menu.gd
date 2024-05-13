@@ -5,7 +5,7 @@ func _ready():
 	
 func _on_play_button_pressed():
 	$Audio/NormalClick.play()
-	get_tree().change_scene_to_file("res://scenes/level_selector/level_selector.tscn")
+	SceneTransition.load_scene("res://scenes/level_selector/level_selector.tscn")
 	
 func _on_quit_button_pressed():
 	$Audio/ExitClick.play()

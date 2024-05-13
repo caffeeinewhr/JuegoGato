@@ -1,12 +1,8 @@
 extends Control
 
-#@onready var LevelScene = preload("res://scenes/level_selector/level.tscn")
-signal number_changed
-
 @export var levelCount: int = 5
 @export var levels: Array[Level] = []
 @export var completedLevels: Array[Level] = []
-
 @export var lineWidth: int = 2
 
 #@export var minX: int = 20
@@ -23,6 +19,7 @@ func setupLevels():
 	for i in levelCount:
 		levels[i].number = i + 1
 		levels[i].label.text = "Level " + str(i + 1)
+		levels[i].battleScene = "res://scenes/level_selector/battle.tscn"
 		
 		if i == 0:
 			levels[i].isFirstLevel = true

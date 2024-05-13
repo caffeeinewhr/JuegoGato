@@ -1,14 +1,14 @@
 extends Control
 
-var paused: bool = false
+var isPaused: bool = false
 
-func _process(_delta):
-	if Input.is_action_just_pressed("pause"):
+func _input(event):
+	if event.is_action_pressed("pause"):
 		pauseMenu()
 			
 func pauseMenu():
-	paused = !paused
-	if paused:
+	isPaused = !isPaused
+	if isPaused:
 		$".".show()
 		AudioSettings.volume = -5.0
 		get_tree().paused = true
@@ -38,4 +38,4 @@ func _on_quit_button_pressed():
 func _on_menu_button_pressed():
 	$Audio/ExitClick.play()
 	get_tree().paused = false
-	get_tree().change_scene_to_file("res://scenes/main_menu/main_menu.tscn")
+	SceneTransition.load_scene("res://scenes/main_menu/main_menu.tscn")

@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://cv7r5iq1whl74"]
+[gd_scene load_steps=14 format=3 uid="uid://cv7r5iq1whl74"]
 
 [ext_resource type="Script" path="res://scenes/main_menu/main_menu.gd" id="1_ew610"]
 [ext_resource type="Theme" uid="uid://b6qthuai1qntb" path="res://art/themes/MinimalUI/MinimalUI.tres" id="1_x40pg"]
@@ -38,6 +38,25 @@ void fragment() {
 shader = SubResource("Shader_xyoir")
 shader_parameter/speed = 0.1
 shader_parameter/distortionAmount = 0.03
+
+[sub_resource type="Shader" id="Shader_w0gru"]
+code = "shader_type canvas_item;
+
+uniform vec4 color: source_color;
+uniform float multiplier = 0.2;
+uniform float softness = 3.0;
+
+void fragment() {
+	float value = distance(UV, vec2(0.5));
+	COLOR = vec4(color.rgb, smoothstep(multiplier, softness, value));
+}
+"
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0kovo"]
+shader = SubResource("Shader_w0gru")
+shader_parameter/color = Color(0, 0, 0, 1)
+shader_parameter/multiplier = 0.2
+shader_parameter/softness = 1.0
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -112,7 +131,6 @@ offset_right = 24.0
 offset_bottom = -9.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_colors/font_color = Color(1, 1, 1, 1)
 theme_override_fonts/font = ExtResource("6_3bv2r")
 theme_override_font_sizes/font_size = 20
 text = "Sleepy
@@ -159,6 +177,17 @@ stream = ExtResource("6_f4dtg")
 
 [node name="NormalClick" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("5_u5wj7")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+material = SubResource("ShaderMaterial_0kovo")
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0, 0, 0, 1)
 
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

@@ -7,7 +7,7 @@ class_name Level
 @onready var label: Label = $Label
 @onready var button: Button = $Button
 
-@onready var battleScene: String = "res://scenes/battle_scene.tscn"
+@onready var battleScene: String
 
 @export var number: int = 0
 @export var isCompleted: bool = false
@@ -18,7 +18,7 @@ func _ready():
 	pass
 
 func _on_button_pressed():
-	get_tree().change_scene_to_file(battleScene)
+	SceneTransition.load_scene(battleScene)
 
 func changeNumber(newNumber):
 	number = newNumber
