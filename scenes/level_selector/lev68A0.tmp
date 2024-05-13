@@ -13,41 +13,40 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_qcvhi")
 
-[node name="Level1" parent="." instance=ExtResource("2_aog86")]
+[node name="Level" parent="." instance=ExtResource("2_aog86")]
 layout_mode = 1
-offset_left = -107.0
-offset_top = 63.0
-offset_right = -107.0
-offset_bottom = 63.0
+offset_left = -105.0
+offset_top = 5.0
+offset_right = -105.0
+offset_bottom = 5.0
 
 [node name="Level2" parent="." instance=ExtResource("2_aog86")]
 layout_mode = 1
-offset_left = -88.0
-offset_top = 12.0
-offset_right = -88.0
-offset_bottom = 12.0
+offset_left = -54.0
+offset_top = -30.0
+offset_right = -54.0
+offset_bottom = -30.0
 
 [node name="Level3" parent="." instance=ExtResource("2_aog86")]
 layout_mode = 1
-offset_left = -20.0
-offset_top = 49.0
-offset_right = -20.0
-offset_bottom = 49.0
+offset_left = -23.0
+offset_top = 40.0
+offset_right = -23.0
+offset_bottom = 40.0
 
 [node name="Level4" parent="." instance=ExtResource("2_aog86")]
 layout_mode = 1
-offset_left = 54.0
-offset_top = 30.0
-offset_right = 54.0
-offset_bottom = 30.0
+offset_left = 33.0
+offset_top = 18.0
+offset_right = 33.0
+offset_bottom = 18.0
 
 [node name="Level5" parent="." instance=ExtResource("2_aog86")]
 layout_mode = 1
-offset_left = 16.0
-offset_top = -27.0
-offset_right = 16.0
-offset_bottom = -27.0
-isBossBattle = true
+offset_left = 93.0
+offset_top = -29.0
+offset_right = 93.0
+offset_bottom = -29.0
 
 [node name="PauseMenu" parent="." instance=ExtResource("4_eo1go")]
 visible = false

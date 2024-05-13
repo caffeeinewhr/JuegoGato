@@ -10,7 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://xwdgjtf1eqxu" path="res://art/sfx/question_002.ogg" id="6_f4dtg"]
 [ext_resource type="AudioStream" uid="uid://c85c8h5luka3r" path="res://art/music/demo_menu.wav" id="7_abs3l"]
 
-[sub_resource type="Shader" id="Shader_t2qy0"]
+[sub_resource type="Shader" id="Shader_xyoir"]
 code = "shader_type canvas_item;
 
 uniform float speed = 0.05;
@@ -35,7 +35,7 @@ void fragment() {
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f01q2"]
-shader = SubResource("Shader_t2qy0")
+shader = SubResource("Shader_xyoir")
 shader_parameter/speed = 0.1
 shader_parameter/distortionAmount = 0.03
 

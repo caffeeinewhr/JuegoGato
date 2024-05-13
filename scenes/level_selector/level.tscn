@@ -1,93 +1,39 @@
-[gd_scene load_steps=10 format=3 uid="uid://dpqmqkkjxn61l"]
+[gd_scene load_steps=8 format=3 uid="uid://dpqmqkkjxn61l"]
 
 [ext_resource type="Script" path="res://scenes/level_selector/level.gd" id="1_52mp4"]
-[ext_resource type="FontFile" uid="uid://ddm3m57t31rfs" path="res://art/fonts/JMH Typewriter.otf" id="1_fimaj"]
+[ext_resource type="Theme" uid="uid://b6qthuai1qntb" path="res://art/themes/MinimalUI/MinimalUI.tres" id="3_p3a3q"]
+[ext_resource type="Texture2D" uid="uid://bhjjbaq75b4nt" path="res://art/backgrounds/waterPattern.webp" id="3_ut6ly"]
+[ext_resource type="Texture2D" uid="uid://dd2ia5vm4bk2h" path="res://art/backgrounds/Pattern.jpg" id="4_0fw1c"]
+[ext_resource type="Texture2D" uid="uid://bd0jskfcuvdwo" path="res://art/backgrounds/cat2.png" id="5_gbpjj"]
 
-[sub_resource type="LabelSettings" id="LabelSettings_q3vf4"]
-font = ExtResource("1_fimaj")
-font_size = 8
-outline_size = 2
-outline_color = Color(0, 0, 0, 1)
+[sub_resource type="Shader" id="Shader_t2qy0"]
+code = "shader_type canvas_item;
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_gotea"]
-bg_color = Color(0.137255, 0.137255, 0.137255, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.368627, 0.368627, 0.368627, 0.85098)
-border_blend = true
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
-shadow_color = Color(0, 0, 0, 0.733333)
-shadow_size = 2
+uniform float speed = 0.05;
+uniform float distortionAmount = 0.05;
 
-[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_jvsnd"]
+void vertex() {
+    UV.x -= TIME * speed;
+}
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mtler"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(0.847059, 0, 0, 0.85098)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+void fragment() {
+    vec2 distorted_uv = vec2(
+        UV.x + sin(UV.y * 2.0 + TIME) * distortionAmount,
+        UV.y + cos(UV.x * 2.0 + TIME) * distortionAmount
+    );
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rsaco"]
-bg_color = Color(0, 0, 0, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 1, 1, 0.85098)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+    vec4 texColor = texture(TEXTURE, distorted_uv);
+    float luminance = dot(texColor.rgb, vec3(0.2126, 0.7152, 0.0722));
+    vec3 finalColor = mix(vec3(0.0), vec3(0.5, 0.0, 0.0), luminance);
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x8vmr"]
-bg_color = Color(0.180392, 0.180392, 0.180392, 1)
-border_width_left = 1
-border_width_top = 1
-border_width_right = 1
-border_width_bottom = 1
-border_color = Color(1, 1, 1, 0.85098)
-corner_radius_top_left = 5
-corner_radius_top_right = 5
-corner_radius_bottom_right = 5
-corner_radius_bottom_left = 5
+    COLOR = vec4(finalColor, texColor.a);
+}
+"
 
-[sub_resource type="Theme" id="Theme_xyhdb"]
-default_font = ExtResource("1_fimaj")
-default_font_size = 16
-Button/colors/font_color = Color(0.875, 0.875, 0.875, 1)
-Button/colors/font_disabled_color = Color(0.875, 0.875, 0.875, 0.5)
-Button/colors/font_focus_color = Color(0.95, 0.95, 0.95, 1)
-Button/colors/font_hover_color = Color(0.95, 0.95, 0.95, 1)
-Button/colors/font_hover_pressed_color = Color(1, 1, 1, 1)
-Button/colors/font_outline_color = Color(0, 0, 0, 1)
-Button/colors/font_pressed_color = Color(1, 1, 1, 1)
-Button/colors/icon_disabled_color = Color(1, 1, 1, 0.4)
-Button/colors/icon_focus_color = Color(1, 1, 1, 1)
-Button/colors/icon_hover_color = Color(1, 1, 1, 1)
-Button/colors/icon_hover_pressed_color = Color(1, 1, 1, 1)
-Button/colors/icon_normal_color = Color(1, 1, 1, 1)
-Button/colors/icon_pressed_color = Color(1, 1, 1, 1)
-Button/constants/h_separation = 4
-Button/constants/icon_max_width = 0
-Button/constants/outline_size = 4
-Button/font_sizes/font_size = 16
-Button/fonts/font = ExtResource("1_fimaj")
-Button/styles/disabled = SubResource("StyleBoxFlat_gotea")
-Button/styles/focus = SubResource("StyleBoxEmpty_jvsnd")
-Button/styles/hover = SubResource("StyleBoxFlat_mtler")
-Button/styles/normal = SubResource("StyleBoxFlat_rsaco")
-Button/styles/pressed = SubResource("StyleBoxFlat_x8vmr")
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_xsm6e"]
+shader = SubResource("Shader_t2qy0")
+shader_parameter/speed = -0.2
+shader_parameter/distortionAmount = 0.2
 
 [node name="Level" type="Control" groups=["levelControls"]]
 layout_mode = 3
@@ -98,26 +44,165 @@ anchor_right = 0.5
 anchor_bottom = 0.5
 grow_horizontal = 2
 grow_vertical = 2
+theme = ExtResource("3_p3a3q")
 script = ExtResource("1_52mp4")
 
-[node name="Label" type="Label" parent="."]
+[node name="Boss" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_right = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MovingPattern1" type="TextureRect" parent="Boss"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_xsm6e")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -26.0
+offset_top = -26.0
+offset_right = -21.0
+offset_bottom = -24.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(6.37704, 7.96976)
+texture = ExtResource("3_ut6ly")
+expand_mode = 1
+
+[node name="MovingPattern2" type="TextureRect" parent="Boss"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_xsm6e")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -26.0
+offset_right = 422.0
+offset_bottom = 470.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.00501919, 0.0321001)
+texture = ExtResource("4_0fw1c")
+
+[node name="BossTexture" type="TextureRect" parent="Boss"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -17.0
-offset_top = -21.5
-offset_right = 17.0
-offset_bottom = -10.5
+offset_left = -2.0
+offset_top = -25.0
+offset_right = 4.0
+offset_bottom = -19.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("5_gbpjj")
+expand_mode = 3
+
+[node name="BossLabel" type="Label" parent="Boss"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -25.0
+offset_top = -25.0
+offset_right = -3.0
+offset_bottom = -18.0
 grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 4
 size_flags_vertical = 1
-theme_override_font_sizes/font_size = 12
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 2
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 5
+text = "B O S S"
+horizontal_alignment = 1
+vertical_alignment = 1
+uppercase = true
+
+[node name="Normal" type="Control" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_right = 17.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="MovingPattern1" type="TextureRect" parent="Normal"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_xsm6e")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -26.0
+offset_top = -20.0
+offset_right = -5.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_ut6ly")
+expand_mode = 1
+
+[node name="MovingPattern2" type="TextureRect" parent="Normal"]
+texture_repeat = 2
+material = SubResource("ShaderMaterial_xsm6e")
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -28.0
+offset_top = -20.0
+offset_right = -26.0
+offset_bottom = -10.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("4_0fw1c")
+expand_mode = 1
+
+[node name="Label" type="Label" parent="."]
+visible = false
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -9.0
+offset_top = -17.0
+offset_right = 13.0
+offset_bottom = -11.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+size_flags_vertical = 1
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 0
+theme_override_constants/shadow_outline_size = 2
+theme_override_constants/line_spacing = 0
+theme_override_font_sizes/font_size = 4
 text = "Level 1"
-label_settings = SubResource("LabelSettings_q3vf4")
+horizontal_alignment = 1
+vertical_alignment = 1
 uppercase = true
 
 [node name="Button" type="Button" parent="."]
@@ -127,13 +212,14 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -6.5
-offset_top = -6.5
-offset_right = 6.5
-offset_bottom = 6.5
+offset_left = -7.0
+offset_top = -8.0
+offset_right = 6.0
+offset_bottom = 5.0
 grow_horizontal = 2
 grow_vertical = 2
 mouse_default_cursor_shape = 2
-theme = SubResource("Theme_xyhdb")
 
+[connection signal="mouse_entered" from="Button" to="." method="_on_button_mouse_entered"]
+[connection signal="mouse_exited" from="Button" to="." method="_on_button_mouse_exited"]
 [connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
