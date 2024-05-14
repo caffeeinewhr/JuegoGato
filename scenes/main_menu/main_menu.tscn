@@ -5,12 +5,12 @@
 [ext_resource type="Texture2D" uid="uid://bhjjbaq75b4nt" path="res://art/backgrounds/waterPattern.webp" id="4_84flg"]
 [ext_resource type="Texture2D" uid="uid://dd2ia5vm4bk2h" path="res://art/backgrounds/Pattern.jpg" id="4_gmuka"]
 [ext_resource type="Texture2D" uid="uid://bd0jskfcuvdwo" path="res://art/backgrounds/cat2.png" id="5_6hu1k"]
-[ext_resource type="AudioStream" uid="uid://nqwqx1i2xtjp" path="res://art/sfx/drop_003.ogg" id="5_u5wj7"]
 [ext_resource type="FontFile" uid="uid://ddm3m57t31rfs" path="res://art/fonts/JMH Typewriter.otf" id="6_3bv2r"]
-[ext_resource type="AudioStream" uid="uid://xwdgjtf1eqxu" path="res://art/sfx/question_002.ogg" id="6_f4dtg"]
 [ext_resource type="AudioStream" uid="uid://c85c8h5luka3r" path="res://art/music/demo_menu.wav" id="7_abs3l"]
+[ext_resource type="AudioStream" uid="uid://ch1qwovae6hdw" path="res://art/sfx/select_006.ogg" id="8_y4qr8"]
+[ext_resource type="AudioStream" uid="uid://6juhwdamjhgb" path="res://art/sfx/click_001.ogg" id="9_mbi5e"]
 
-[sub_resource type="Shader" id="Shader_xyoir"]
+[sub_resource type="Shader" id="Shader_yxhtj"]
 code = "shader_type canvas_item;
 
 uniform float speed = 0.05;
@@ -27,15 +27,15 @@ void fragment() {
     );
 
     vec4 texColor = texture(TEXTURE, distorted_uv);
-    float luminance = dot(texColor.rgb, vec3(0.2126, 0.7152, 0.0722));
-    vec3 finalColor = mix(vec3(0.0), vec3(0.5, 0.0, 0.0), luminance);
+    float luminance = dot(texColor.rgb, vec3(1, 1, 0.05));
+    vec3 finalColor = mix(vec3(0.0), vec3(0.4, 0.0, 0.0), luminance);
 
     COLOR = vec4(finalColor, texColor.a);
 }
 "
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f01q2"]
-shader = SubResource("Shader_xyoir")
+shader = SubResource("Shader_yxhtj")
 shader_parameter/speed = 0.1
 shader_parameter/distortionAmount = 0.03
 
@@ -154,10 +154,10 @@ stream = ExtResource("7_abs3l")
 autoplay = true
 
 [node name="ExitClick" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("6_f4dtg")
+stream = ExtResource("8_y4qr8")
 
 [node name="NormalClick" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("5_u5wj7")
+stream = ExtResource("9_mbi5e")
 
 [connection signal="pressed" from="VBoxContainer/PlayButton" to="." method="_on_play_button_pressed"]
 [connection signal="pressed" from="VBoxContainer/QuitButton" to="." method="_on_quit_button_pressed"]

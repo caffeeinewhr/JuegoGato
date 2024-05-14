@@ -11,30 +11,9 @@ class_name Level
 
 @export var number: int = 0
 @export var isCompleted: bool = false
+@export var isPlayable: bool = false
 @export var isFirstLevel: bool = false
 @export var isBossBattle: bool = false
 
 func _ready():
 	pass
-
-func _on_button_pressed():
-	SceneTransition.load_scene(battleScene)
-
-func changeNumber(newNumber):
-	number = newNumber
-
-func _on_button_mouse_entered():
-	if isBossBattle:
-		boss.show()
-		label.show()
-	else:
-		normal.show()
-		label.show()
-		
-func _on_button_mouse_exited():
-	if isBossBattle:
-		boss.hide()
-		label.hide()
-	else:
-		normal.hide()
-		label.hide()

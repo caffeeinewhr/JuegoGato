@@ -4,6 +4,7 @@ var isPaused: bool = false
 
 func _input(event):
 	if event.is_action_pressed("pause"):
+		$Audio/ExitClick.play()
 		pauseMenu()
 			
 func pauseMenu():

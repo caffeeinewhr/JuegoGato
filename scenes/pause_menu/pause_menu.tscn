@@ -3,8 +3,8 @@
 [ext_resource type="Theme" uid="uid://b6qthuai1qntb" path="res://art/themes/MinimalUI/MinimalUI.tres" id="1_2did3"]
 [ext_resource type="Script" path="res://scenes/pause_menu/pause_menu.gd" id="1_hvjqk"]
 [ext_resource type="Texture2D" uid="uid://dd2ia5vm4bk2h" path="res://art/backgrounds/Pattern.jpg" id="3_7bkro"]
+[ext_resource type="AudioStream" uid="uid://ch1qwovae6hdw" path="res://art/sfx/select_006.ogg" id="4_4rfro"]
 [ext_resource type="AudioStream" uid="uid://nqwqx1i2xtjp" path="res://art/sfx/drop_003.ogg" id="4_lpqf3"]
-[ext_resource type="AudioStream" uid="uid://xwdgjtf1eqxu" path="res://art/sfx/question_002.ogg" id="5_aoxmo"]
 
 [sub_resource type="Shader" id="Shader_jnmsl"]
 code = "shader_type canvas_item;
@@ -120,7 +120,7 @@ text = "Quit"
 [node name="Audio" type="Node" parent="."]
 
 [node name="ExitClick" type="AudioStreamPlayer" parent="Audio"]
-stream = ExtResource("5_aoxmo")
+stream = ExtResource("4_4rfro")
 
 [node name="NormalClick" type="AudioStreamPlayer" parent="Audio"]
 stream = ExtResource("4_lpqf3")
